@@ -74,3 +74,24 @@ function playRound() {
     }
     (playerScore > computerScore) ? console.log(`Congratulations! You won with score = ${playerScore} vs ${computerScore}!`): console.log(`Bad luck! You lose with score = ${playerScore} vs ${computerScore}!`);
 }
+
+const playButton = document.querySelector('.play');
+function createPlBtn() {
+    const parent = document.querySelector('.options');
+    const rock = document.createElement("button");
+    const paper = document.createElement("button");
+    const scissors = document.createElement("button");
+    rock.classList.add('choice');
+    paper.classList.add('choice');
+    scissors.classList.add('choice');
+    rock.textContent = "Rock";
+    paper.textContent = "Paper";
+    scissors.textContent = "Scissors";
+    parent.appendChild(rock);
+    parent.appendChild(paper);
+    parent.appendChild(scissors);
+    once: true;
+}
+playButton.addEventListener('click', createPlBtn, {
+    once: true
+});
