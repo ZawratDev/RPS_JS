@@ -1,55 +1,62 @@
-// function createPlBtn() {
-//     const parent = document.querySelector('.options');
-//     const rock = document.createElement("button");
-//     const paper = document.createElement("button");
-//     const scissors = document.createElement("button");
-//     rock.classList.add('choice');
-//     rock.setAttribute('id', 'rock');
-//     paper.classList.add('choice');
-//     paper.setAttribute('id', 'paper');
-//     scissors.classList.add('choice');
-//     scissors.setAttribute('id', 'scissors');
-//     rock.textContent = "Rock";
-//     paper.textContent = "Paper";
-//     scissors.textContent = "Scissors";
-//     parent.appendChild(rock);
-//     parent.appendChild(paper);
-//     parent.appendChild(scissors);
-//     once: true;
-// }
-// playButton.addEventListener('click', createPlBtn, {
-//     once: true
-// });
-const parent = document.querySelector('.options');
-const rock = document.createElement("button");
-const paper = document.createElement("button");
-const scissors = document.createElement("button");
-rock.classList.add('choice');
-rock.setAttribute('id', 'rock');
-paper.classList.add('choice');
-paper.setAttribute('id', 'paper');
-scissors.classList.add('choice');
-scissors.setAttribute('id', 'scissors');
-rock.textContent = "Rock";
-paper.textContent = "Paper";
-scissors.textContent = "Scissors";
-parent.appendChild(rock);
-parent.appendChild(paper);
-parent.appendChild(scissors);
-let gameButtons = document.querySelectorAll('.choice');
+function createPlBtn() {
+    const parent = document.querySelector('.options');
+    const rock = document.createElement("button");
+    const paper = document.createElement("button");
+    const scissors = document.createElement("button");
+    rock.classList.add('choice');
+    rock.setAttribute('id', 'rock');
+    paper.classList.add('choice');
+    paper.setAttribute('id', 'paper');
+    scissors.classList.add('choice');
+    scissors.setAttribute('id', 'scissors');
+    rock.textContent = "Rock";
+    paper.textContent = "Paper";
+    scissors.textContent = "Scissors";
+    parent.appendChild(rock);
+    parent.appendChild(paper);
+    parent.appendChild(scissors);
+    playButton.classList.add('played');
+    playButton.classList.remove('play');
+    playButton.textContent = 'Choose your weapon down below:'
+    game();
+}
+let playButton = document.querySelector('.play');
+playButton.addEventListener('click', createPlBtn, {
+    once: true
+});
+// const parent = document.querySelector('.options');
+// const rock = document.createElement("button");
+// const paper = document.createElement("button");
+// const scissors = document.createElement("button");
+// rock.classList.add('choice');
+// rock.setAttribute('id', 'rock');
+// paper.classList.add('choice');
+// paper.setAttribute('id', 'paper');
+// scissors.classList.add('choice');
+// scissors.setAttribute('id', 'scissors');
+// rock.textContent = "Rock";
+// paper.textContent = "Paper";
+// scissors.textContent = "Scissors";
+// parent.appendChild(rock);
+// parent.appendChild(paper);
+// parent.appendChild(scissors);
 let playerInput;
 let playerScore = 0;
 let computerScore = 0;
-gameButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        playRound(button.id);
-        if (playerScore === 5 || computerScore === 5) {
-(playerScore > computerScore) ? console.log(`Congratulations! You won with score = ${playerScore} vs ${computerScore}!`): console.log(`Bad luck! You lose with score = ${playerScore} vs ${computerScore}!`);
-        playerScore = 0;
-        computerScore = 0;
-        }
+function game() {
+    let gameButtons = document.querySelectorAll('.choice');
+    gameButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            playerInput = button.id;
+            playRound(playerInput);
+            if (playerScore === 5 || computerScore === 5) {
+                (playerScore > computerScore) ? console.log(`Congratulations! You won with score = ${playerScore} vs ${computerScore}!`): console.log(`Bad luck! You lose with score = ${playerScore} vs ${computerScore}!`);
+                playerScore = 0;
+                computerScore = 0;
+            }
+        }); 
     }); 
-}); 
+}
 function playRound(playerChoice) {
     function computerPlay() {
         const list = ['rock', 'paper', 'scissors'];
@@ -57,8 +64,8 @@ function playRound(playerChoice) {
         return list[type];
     }
     computerSelection = computerPlay()
-    console.log(playerChoice);
-    console.log(computerSelection);
+    console.log('Player: ' + playerChoice);
+    console.log('Computer: ' + computerSelection);
 
     if (computerSelection === 'rock') {
         switch (playerChoice) {
@@ -106,10 +113,12 @@ function playRound(playerChoice) {
     console.log(`Your score: ${playerScore}`);
     console.log(`Computer score: ${computerScore}`);
 }
-const playButton = document.querySelector('.play');
 // Wywolywanie gry 
 rockChoice = document.querySelector('#rock');
 console.log(rockChoice);
 playButton.addEventListener('click', function playGame() {
     playRound();
 });
+
+
+// Następny krok to wyświetlanie wyniku na stronie
